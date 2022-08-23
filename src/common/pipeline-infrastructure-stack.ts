@@ -9,7 +9,7 @@ export interface ProjectStackProps extends StackProps {
     infrastructureName: string;
 }
 
-export class InfrastructureStack extends Stack {
+export class PipelineInfrastructureStack extends Stack {
     constructor(scope: Construct, id: string, props: Omit<StackProps, 'env'> & { infrastructureName: string; deployEnv: string; env: Environment }) {
         super(scope, id, props);
 
