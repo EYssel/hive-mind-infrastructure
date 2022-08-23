@@ -3,6 +3,7 @@ import { ComputeType, LinuxBuildImage, PipelineProject } from 'aws-cdk-lib/aws-c
 import { Code, Repository } from 'aws-cdk-lib/aws-codecommit';
 import { Artifact, Pipeline } from 'aws-cdk-lib/aws-codepipeline';
 import { CodeBuildAction, CodeCommitSourceAction } from 'aws-cdk-lib/aws-codepipeline-actions';
+import { ManagedPolicy } from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 
 export interface ProjectStackProps extends StackProps {
@@ -53,9 +54,11 @@ export class PipelineInfrastructureStack extends Stack {
             projectName: props.infrastructureName,
             environment: {
                 buildImage: LinuxBuildImage.AMAZON_LINUX_2_4,
-                computeType: ComputeType.SMALL
+                computeType: ComputeType.SMALL,
             },
         });
+
+        codeBuildProject.role?.addManagedPolicy(ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess'));
 
         const buildOutput = new Artifact(`${props.infrastructureName}-build-artifacts`);
 
