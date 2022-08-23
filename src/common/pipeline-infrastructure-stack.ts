@@ -1,5 +1,5 @@
 import { Environment, Stack, StackProps } from 'aws-cdk-lib';
-import { LinuxBuildImage, PipelineProject } from 'aws-cdk-lib/aws-codebuild';
+import { ComputeType, LinuxBuildImage, PipelineProject } from 'aws-cdk-lib/aws-codebuild';
 import { Code, Repository } from 'aws-cdk-lib/aws-codecommit';
 import { Artifact, Pipeline } from 'aws-cdk-lib/aws-codepipeline';
 import { CodeBuildAction, CodeCommitSourceAction } from 'aws-cdk-lib/aws-codepipeline-actions';
@@ -52,7 +52,8 @@ export class PipelineInfrastructureStack extends Stack {
         const codeBuildProject = new PipelineProject(this, `Infrastructure-Pipeline-Project`, {
             projectName: props.infrastructureName,
             environment: {
-                buildImage: LinuxBuildImage.AMAZON_LINUX_2,
+                buildImage: LinuxBuildImage.AMAZON_LINUX_2_4,
+                computeType: ComputeType.SMALL
             },
         });
 
