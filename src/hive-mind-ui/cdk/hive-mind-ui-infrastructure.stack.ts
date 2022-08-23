@@ -5,18 +5,19 @@ import { InfrastructureStack } from '../../common/infrastructure-stack';
 
 const cdkApp = new App();
 
-export class HiveMindUiInfrastructureStack extends Stack {
-    constructor(scope: Construct, id: string, props: Omit<StackProps, "env"> & { env: Environment }) {
+export class HiveMindInfrastructureStack extends Stack {
+    constructor(scope: Construct, id: string, props: Omit<StackProps, 'env'> & { env: Environment }) {
         super(scope, id, props);
 
         const infrastructure = new InfrastructureStack(this, 'HiveMind-Ui-Infrastructure', {
             infrastructureName: `HiveMindUi`,
-            env: props?.env,
+            deployEnv: `dev`,
+            env: props.env,
         });
     }
 }
 
-new HiveMindUiInfrastructureStack(cdkApp, `HiveMindUi-Infrastructure-Stack`, {
+new HiveMindInfrastructureStack(cdkApp, `HiveMind-Infrastructure-Stack`, {
     env: {
         account: '836828574614',
         region: 'eu-west-1',
