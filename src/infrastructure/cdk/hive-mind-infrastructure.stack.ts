@@ -8,7 +8,7 @@ const cdkApp = new App();
 export class HiveMindInfrastructureStack extends Stack {
     constructor(scope: Construct, id: string, props: Omit<StackProps, 'env'> & { env: Environment }) {
         super(scope, id, props);
-
+ 
         const hiveMindUiInfrastructure = new PipelineInfrastructureStack(this, 'HiveMind-UI-Infrastructure', {
             infrastructureName: `HiveMind-UI`,
             deployEnv: `dev`,
